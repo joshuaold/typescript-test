@@ -23,5 +23,6 @@ const Icon = styled.div`
 const Title = styled.div`
   display: flex;
   flex-grow: 6;
-  justify-content: center;
+  justify-content: left;
+  padding-left: 20px;
 `;

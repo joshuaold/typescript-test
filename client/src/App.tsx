@@ -10,11 +10,11 @@ function App() {
   return (
     <Container>
       <Header
-        icon="icon"
-        title="title"
+        icon={isMenuOpen ? "arrow" : "burger"}
+        title={isMenuOpen ? "Menu" : "Register card form"}
         onClick={() => setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen)}
       />
-      {isMenuOpen ? <Menu /> : <RegisterCardForm />}
+      {isMenuOpen ? <Menu /> : <RegisterCardForm firstName="Test" />}
     </Container>
   );
 }
