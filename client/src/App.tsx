@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "./components/header";
 import RegisterCardForm from "./components/register-card-form";
+import Menu from "./components/menu";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -13,7 +14,7 @@ function App() {
         title="title"
         onClick={() => setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen)}
       />
-      {isMenuOpen ? <p>menu</p> : <p>form</p>}
+      {isMenuOpen ? <Menu /> : <RegisterCardForm />}
     </Container>
   );
 }
