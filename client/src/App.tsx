@@ -1,14 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import Header from "./components/header";
+import RegisterCardForm from "./components/register-card-form";
 
 function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <Container>
-      <Header>
-        <HeaderIcon>Icon</HeaderIcon>
-        <HeaderText>Text</HeaderText>
-      </Header>
-      <Body>Hello</Body>
+      <Header
+        icon="icon"
+        title="title"
+        onClick={() => setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen)}
+      />
+      {isMenuOpen ? <p>menu</p> : <p>form</p>}
     </Container>
   );
 }
@@ -16,27 +21,6 @@ function App() {
 const Container = styled.div`
   display: flex;
   flex-flow: row wrap;
-  border: 2px solid black;
-`;
-
-const Header = styled.div`
-  width: 100%;
-  border: 2px solid black;
-  display: flex;
-`;
-
-const HeaderIcon = styled.div`
-  flex-grow: 1;
-`;
-
-const HeaderText = styled.div`
-  display: flex;
-  flex-grow: 6;
-  justify-content: center;
-`;
-
-const Body = styled.div`
-  width: 100%;
   border: 2px solid black;
 `;
 
