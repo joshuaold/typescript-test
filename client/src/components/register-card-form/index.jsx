@@ -1,16 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 export default function RegisterCardForm(props) {
+  const [cardNumber, setCardNumber] = useState();
+  const [cvc, setCVC] = useState();
+  const [expiryDate, setExpiryDate] = useState();
+  const [errorMessage, setErrorMessage] = useState("");
+  const [isCardDetailsValid, setIsCardDetailsValid] = useState(false);
+
+  const validateCardDetails = () => {
+    if (isNaN(cardNumber)) {
+      setIsCardDetailsValid(false);
+      setErrorMessage("Card number is not a valid number");
+    } else if (isNaN(cvc)) {
+      setIsCardDetailsValid(false);
+      setErrorMessage("CVC is not a valid number");
+    } else if (!(expiryDate instanceof Date) && !isFinite(expiryDate)) {
+      setIsCardDetailsValid(false);
+      setErrorMessage("Expirt date is not a valid number");
+    } else {
+      setIsCardDetailsValid(true);
+      setErrorMessage();
+    }
+  };
+
+  const submitCardApplication = () => {
+    validateCardDetails();
+
+    if (isCardDetailsValid) {
+      console.log(
+        `Card Number: ${cardNumber}, CVC: ${cvc}, Expiry Date: ${expiryDate}`
+      );
+    }
+  };
+
   return (
     <Container>
       <MessageArea>Welcome {props.firstName}</MessageArea>
       <CreditCardDetails>
-        <CardNumber placeholder="Credit card number"></CardNumber>
-        <CVC placeholder="CVC"></CVC>
-        <Expiry placeholder="expiry"></Expiry>
+        <CardNumber
+          placeholder="Credit card number"
+          onChange={(e) => setCardNumber(e.target.value)}
+        />
+        <CVC placeholder="CVC" onChange={(e) => setCVC(e.target.value)} />
+        <Expiry
+          placeholder="expiry"
+          onChange={(e) => setExpiryDate(e.target.value)}
+        />
       </CreditCardDetails>
-      <SubmitButton>Submit</SubmitButton>
+      <p>{errorMessage}</p>
+      <SubmitButton onClick={submitCardApplication}>Submit</SubmitButton>
     </Container>
   );
 }
