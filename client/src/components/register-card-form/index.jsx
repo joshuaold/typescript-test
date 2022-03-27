@@ -15,9 +15,9 @@ export default function RegisterCardForm(props) {
     } else if (isNaN(cvc)) {
       setIsCardDetailsValid(false);
       setErrorMessage("CVC is not a valid number");
-    } else if (!(expiryDate instanceof Date) && !isFinite(expiryDate)) {
+    } else if (!(expiryDate instanceof Date && !isNaN(expiryDate))) {
       setIsCardDetailsValid(false);
-      setErrorMessage("Expirt date is not a valid number");
+      setErrorMessage("Expiry date is not a valid number");
     } else {
       setIsCardDetailsValid(true);
       setErrorMessage();
@@ -44,8 +44,9 @@ export default function RegisterCardForm(props) {
         />
         <CVC placeholder="CVC" onChange={(e) => setCVC(e.target.value)} />
         <Expiry
+          type="date"
           placeholder="expiry"
-          onChange={(e) => setExpiryDate(e.target.value)}
+          onChange={(e) => setExpiryDate(new Date(e.target.value))}
         />
       </CreditCardDetails>
       <p>{errorMessage}</p>
